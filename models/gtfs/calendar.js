@@ -69,4 +69,13 @@ const Calendar = mongoose.model('Calendar', new mongoose.Schema({
   }
 }));
 
+Calendar.collection.createIndex({ agency_key: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, monday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, tuesday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, wednesday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, thursday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, friday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, saturday: 1, start_date: 1, end_date: 1 });
+Calendar.collection.createIndex({ agency_key: 1, sunday: 1, start_date: 1, end_date: 1 });
+
 module.exports = Calendar;

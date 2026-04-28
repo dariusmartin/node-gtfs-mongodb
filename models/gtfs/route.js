@@ -32,4 +32,6 @@ const Route = mongoose.model('Route', new mongoose.Schema({
   route_sort_order: Number,
 }));
 
+Route.collection.createIndex({ agency_key: 1, route_id: 1 }, { unique: true });
+
 module.exports = Route;
