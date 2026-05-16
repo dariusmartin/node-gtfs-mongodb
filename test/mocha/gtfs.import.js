@@ -15,7 +15,7 @@ const models = require('../../models/models');
 
 const agenciesFixturesUrl = [{
   agency_key: 'caltrain',
-  url: 'http://transitfeeds.com/p/caltrain/122/20160406/download'
+  url: 'http://data.trilliumtransit.com/gtfs/caltrain-ca-us/caltrain-ca-us.zip'
 }];
 
 const agenciesFixturesLocal = [{
