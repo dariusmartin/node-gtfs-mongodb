@@ -4,10 +4,10 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const extract = require('extract-zip');
 const { parse } = require('csv-parse');
 const mongoose = require('mongoose');
 const should = require('should');
+const unzipper = require('unzipper');
 
 const config = require('../config.json');
 const gtfs = require('../..');
@@ -24,6 +24,12 @@ const agencyKey = agenciesFixtures[0].agency_key;
 config.agencies = agenciesFixtures;
 
 describe('lib/export.js', function () {
+  const extractZipFile = async (zipPath, outputPath) => {
+    await fs.createReadStream(zipPath)
+      .pipe(unzipper.Extract({ path: outputPath }))
+      .promise();
+  };
+
   before(async () => {
     await mongoose.connect(config.mongoUrl);
     await mongoose.connection.db.dropDatabase();
@@ -50,7 +56,7 @@ describe('lib/export.js', function () {
     const temporaryDir = path.join(__dirname, '../fixture/tmp/');
 
     before(async () => {
-      await extract(agenciesFixtures[0].path, { dir: temporaryDir });
+      await extractZipFile(agenciesFixtures[0].path, temporaryDir);
 
       await Promise.all(models.map(model => {
         const filePath = path.join(temporaryDir, `${model.filenameBase}.txt`);
